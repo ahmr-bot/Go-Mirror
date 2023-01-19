@@ -3,6 +3,7 @@ package routers
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/ahmr-bot/MirrorsAPI/pkg"
 	"github.com/gorilla/mux"
 	"github.com/patrickmn/go-cache"
 	"log"
@@ -20,6 +21,7 @@ type Config struct {
 		Image       string `json:"image"`
 	} `json:"directories"`
 	ServerAddr any `json:"server_addr"`
+	ListenPort any `json:"listen_port"`
 }
 type Dir struct {
 	Description string   `json:"description"`
@@ -40,6 +42,7 @@ type Files struct {
 }
 
 func HandleList(w http.ResponseWriter, r *http.Request) {
+	pkg.SetupCORS(&w)
 	// 读取配置文件
 	file, err := os.Open("config.json")
 	if err != nil {
@@ -100,7 +103,7 @@ func HandleList(w http.ResponseWriter, r *http.Request) {
 				} else {
 					files = append(files, Files{
 						Name: fi.Name(),
-						Url:  fmt.Sprintf("%s/download/%s/%s", config.ServerAddr, mux.Vars(r)["path"], fi.Name()),
+						Url:  fmt.Sprintf("%s:%s/download/%s/%s", config.ServerAddr, config.ListenPort, mux.Vars(r)["path"], fi.Name()),
 						Size: fi.Size() / 1024 / 1024,
 					})
 				}

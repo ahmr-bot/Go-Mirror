@@ -1,0 +1,16 @@
+{
+    "dev": {
+        "defaultServer": "http://127.0.0.1:8080/",
+        "bjServer": "http://bj..com/",
+        "gzServer": "http://gz..com/",
+        "gsServer": "http://jc..com/",
+        "AutoSel": "http://auto..com/"
+    },
+    "prod": {
+        "defaultServer": "",
+        "bjServer": "http://bj..com/",
+        "gzServer": "http://gz..com/",
+        "gsServer": "http://jc..com/",
+        "AutoSel": "http://auto..com/"
+    }
+}
