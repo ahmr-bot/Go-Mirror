@@ -6,6 +6,7 @@ import (
 	"github.com/ahmr-bot/MirrorsAPI/routers"
 	"github.com/gorilla/mux"
 	"github.com/patrickmn/go-cache"
+	"github.com/ahmr-bot/MirrorsAPI/middleware"
 	"log"
 	"net/http"
 	"os"
@@ -43,19 +44,19 @@ func main() {
 	}
 	dirCache.Set("config", config, cache.DefaultExpiration)
 	// 对配置文件进行缓存
-	fmt.Printf("\n配置文件写入缓存")
-	fmt.Printf("\n镜缘镜像站 API 服务启动成功！")
+	fmt.Println("配置文件写入缓存")
+	fmt.Println("\n镜缘镜像站 API 服务启动成功！")
 	// 读取缓存
 	if x, found := dirCache.Get("config"); found {
 		config = x.(Config)
 	} else {
 		log.Fatal("无法从缓存中找到配置文件")
 	}
-	fmt.Printf("\n监听端口" + config.ListenPort)
+	fmt.Printf("监听端口" + config.ListenPort)
 	// 设定路由
-	r := mux.NewRouter()
-	r.HandleFunc("/", routers.HandleIndex)
-	r.HandleFunc("/list/{path:.*}", routers.HandleList)
-	r.HandleFunc("/download/{path:.*}", routers.HandleDownload)
-	http.ListenAndServe(":"+config.ListenPort, r)
+	router := mux.NewRouter()
+	router.HandleFunc("/", middleware.RateLimiter(60,60)(routers.HandleIndex))
+	router.HandleFunc("/list/{path:.*}", middleware.RateLimiter(60,60)(routers.HandleList))
+	router.HandleFunc("/download/{path:.*}", middleware.RateLimiter(60,60)(routers.HandleDownload))
+	http.ListenAndServe(":"+config.ListenPort, router)
 }
