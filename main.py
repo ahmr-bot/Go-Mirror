@@ -28,7 +28,7 @@ cores = [
 
 
 def download(core, name, url):
-    url = url.replace("https", "http")
+    url = url.replace("servers", "server")
     url= url.replace("cdn", "prdx")
     print(f"正在下载 {url} : {name}")
     response = requests.get(url)
