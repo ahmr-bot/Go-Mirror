@@ -3,10 +3,10 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/ahmr-bot/MirrorsAPI/middleware"
 	"github.com/ahmr-bot/MirrorsAPI/routers"
 	"github.com/gorilla/mux"
 	"github.com/patrickmn/go-cache"
-	"github.com/ahmr-bot/MirrorsAPI/middleware"
 	"log"
 	"net/http"
 	"os"
@@ -55,8 +55,8 @@ func main() {
 	fmt.Printf("监听端口" + config.ListenPort)
 	// 设定路由
 	router := mux.NewRouter()
-	router.HandleFunc("/", middleware.RateLimiter(60,60)(routers.HandleIndex))
-	router.HandleFunc("/list/{path:.*}", middleware.RateLimiter(60,60)(routers.HandleList))
-	router.HandleFunc("/download/{path:.*}", middleware.RateLimiter(60,60)(routers.HandleDownload))
+	router.HandleFunc("/", middleware.RateLimiter(60, 60)(routers.HandleIndex))
+	router.HandleFunc("/list/{path:.*}", middleware.RateLimiter(60, 60)(routers.HandleList))
+	router.HandleFunc("/download/{path:.*}", middleware.RateLimiter(5, 60)(routers.HandleDownload))
 	http.ListenAndServe(":"+config.ListenPort, router)
 }
