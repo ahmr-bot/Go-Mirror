@@ -13,7 +13,7 @@
               后端及前端程序 由 Aehxy 开发，服务端同步工具 由 kingc 开发。
               <br /> 
               网络部分由 PH 提供支持。<br />
-              当前选择的存储服务器: {{servername}}<br />
+              当前选择的存储服务器: {{ servername }}<br />
               手动切换服务器:
       </v-card-text>
       <div class="d-flex justify-center align-baseline">
@@ -24,6 +24,7 @@
       <div class="d-flex justify-center align-baseline">
       <v-btn href="/?server=gzServer">贵州服务器</v-btn><br />
       <v-btn href="/?server=gsServer">甘肃服务器</v-btn><br />
+      <v-btn href="/?server=sgpServer">新加坡服务器</v-btn><br />
       </div>  
     </v-card>
           </v-col>
@@ -110,13 +111,12 @@ axios({
   method:'get',
   url:server.value + 'list/'
 }).then((res)=>{
-  console.log(res.data)
   lists.value = res.data.directories
    downlists.value = res.data.directories.map((item)=>{
      return item
    })
    imglists.value = res.data.directories.map((item)=>{
-     return "https://cdn.5-5.site/mirror/imgs/" + item + ".png"
+     return "https://pic.5-5.site/i/2023/01/20/" + item + ".webp"
    })
    // 使list 中同时包含 imglists 和 downlists
      lists.value = lists.value.map((item,index)=>{
