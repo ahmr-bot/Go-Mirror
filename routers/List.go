@@ -46,11 +46,8 @@ type Files struct {
 func HandleList(w http.ResponseWriter, r *http.Request) {
 	
 	pkg.SetupCORS(&w)
-	var config Config
-	if x, found := dirCache.Get("config"); found {
-		config = x.(Config)
-	} else {
-		file, err := os.Open("config.json")
+	// 读取配置文件
+	file, err := os.Open("config.json")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -62,13 +59,15 @@ func HandleList(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 	dirCache.Set("config", config, cache.DefaultExpiration)
+	if x, found := dirCache.Get("config"); found {
+		config = x.(Config)
+	} else {
 	}
 	dirPath := "root/" + mux.Vars(r)["path"]
 	if _, err := os.Stat(dirPath); os.IsNotExist(err) {
 		http.Error(w, "Directory does not exist", http.StatusNotFound)
 		return
 	}
-
 	var dir Dir
 	var description string
 	var image string
@@ -100,7 +99,7 @@ func HandleList(w http.ResponseWriter, r *http.Request) {
 				if mux.Vars(r)["path"] == "" {
 					files = append(files, Files{
 						Name: fi.Name(),
-						Url:  fmt.Sprintf("%s/api/download%s/%s", config.ServerAddr, mux.Vars(r)["path"], fi.Name()),
+						Url:  fmt.Sprintf("%s:%s/api/download%s/%s", config.ServerAddr, config.ListenPort, mux.Vars(r)["path"], fi.Name()),
 						Size: fi.Size() / 1024 / 1024,
 					})
 				} else {

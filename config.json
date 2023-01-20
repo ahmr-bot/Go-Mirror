@@ -1,16 +1,90 @@
 {
-  "listen_port": "8080",
-  "server_addr": "http://127.0.0.1",
-  "server_location": "1111",
+  "listen_port": "4004",
+  "server_addr": "https://127.0.0.1",
+  "server_location": "服务器",
   "directories": [
     {
       "path": "root/Akarin",
-      "description": "114514 服务端十分的牛逼！",
+      "description": "Akarin 是一款支持多线程的 Minecraft 服务端，来自 “新维度”，前身是 TorchSpigot 服务端。",
       "image": "114514.jpg"
     },
     {
-      "path": "/list/114514",
-      "description": "This is the second directory",
+      "path": "root/Bedrock_Server",
+      "description": "Bedrock 是 Minecraft PE 基岩版，也叫携带版或手机版，Bedrock Server 是 Mojang 官方提供的服务端。Bedrock Server 不能安装插件，只能用于纯净游戏联机使用。",
+      "image": "114514.jpg"
+    },    {
+      "path": "root/BungeeCord",
+      "description": "BungeeCord 是一个高性能的反向代理服务端，它可以将多个 Minecraft 服务器变成一个 “群组服务器”。",
+      "image": "114514.jpg"
+    },
+    {
+      "path": "root/CraftBukkit",
+      "description": "Craft Bukkit 是一个老牌的 Minecraft 服务端，支持大部分插件，功能比较完善，目前是更新比较快的几个服务端之一。这个服务端容易出现一些性能问题，如果你的服务器经常在日志中出现“Can't keep up”之类的报错，可以考虑使用 Spigot、PaperSpigot 等服务端。",
+      "image": "114514.jpg"
+    },
+    {
+      "path": "root/HexaCord",
+      "description": "HexaCord 是一个 fork 自 BungeeCord 的反向代理服务端，基于原基础做了一些优化，包括性能的提升。",
+      "image": "114514.jpg"
+    },
+    {
+      "path": "root/Hose",
+      "description": "Hose 是一款开源的多线程 Minecraft 服务端，性能更强。",
+      "image": "114514.jpg"
+    },
+    {
+      "path": "root/MITE",
+      "description": "MITE 是一款提高游戏的生存方面难度的综合类 MOD，通过重新定义并调整游戏机制来增加生存的难度。此为 MITE 官方服务端，无法安装其他任何 MOD 包括 Forge。",
+      "image": "114514.jpg"
+    },
+    {
+      "path": "root/Mohist",
+      "description": "Mohist有坚不可摧和极致优化的代码！Mohist 支持的版本: 1.7.10, 1.12.2, 1.16.5, 1.19.3",
+      "image": "114514.jpg"
+    },
+    {
+      "path": "root/Minecraft_Server",
+      "description": "Minecraft Server 是 Mojang 官方制作的原版服务端，更新非常快，基本上和 Minecraft 客户端版本同时发布，不能安装任何 Mod 和插件，只能够使用原版的命令和物品，适合基友服联机使用。",
+      "image": "114514.jpg"
+    },
+    {
+      "path": "root/NukkitX",
+      "description": "DragonProxy 龙代理是一个高性能的反向代理服务端，其功能类似于 BungeeCord，但是它的作用是让电脑和手机一起联机！",
+      "image": "114514.jpg"
+    },
+    {
+      "path": "root/PaperSpigot",
+      "description": "Spigot 的进一步优化版本，在相关算法方面，较 Spigot 有所提高，优化 TPS 等，支持 CraftBukkit 和 Spigot 插件，API 没有太大修改。在 1.9 版本之前都带有反作弊功能，1.9 之后的版本需要自行安装其他反作弊插件。",
+      "image": "114514.jpg"
+    },
+    {
+      "path": "root/PocketMine-MP",
+      "description": "PocketMine-MP 是一个用 PHP 开发的 Minecraft Bedrock 基岩版服务端，也是目前使用最为广泛的服务端之一。",
+      "image": "114514.jpg"
+    },
+    {
+      "path": "root/Spigot",
+      "description": "Spigot 是 CraftBukkit 服务端之后的延续版本，比 CraftBukkit 优化了不少地方，支持 CraftBukkit 的插件，性能比 CraftBukkit 好很多，并且自带反作弊功能",
+      "image": "114514.jpg"
+    },
+    {
+      "path": "root/SpongeForge",
+      "description": "Sponge 是一个全新的服务端，支持 Sponge 的专用插件，可装 Mod，兼容性比 Cauldron 相比提高了不少，适合开 MOD 服，支持的版本非常高，是目前支持 MOD 的服务端里兼容版本最高的服务端。",
+      "image": "114514.jpg"
+    },
+    {
+      "path": "root/SpongeVanilla",
+      "description": "SpongeVanilla 是 SpongeForge 的纯净版本，同样支持 SpongeForge 的插件。",
+      "image": "114514.jpg"
+    },
+    {
+      "path": "root/Velocity",
+      "description": "Velocity 是一个 Minecraft 反向代理服务端，拥有非常强大的服务器支持，可扩展性和灵活性。",
+      "image": "114514.jpg"
+    },
+    {
+      "path": "root/Waterfall",
+      "description": "WaterFall 是 BungeeCord 的一个高性能优化分支。",
       "image": "114514.jpg"
     }
   ]

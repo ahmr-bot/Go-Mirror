@@ -59,5 +59,11 @@ func main() {
 	router.HandleFunc("/api/location", middleware.RateLimiter(60, 60)(routers.HandleLocation))
 	router.HandleFunc("/api/list/{path:.*}", middleware.RateLimiter(60, 60)(routers.HandleList))
 	router.HandleFunc("/api/download/{path:.*}", middleware.RateLimiter(5, 60)(routers.HandleDownload))
-	http.ListenAndServe(":"+config.ListenPort, router)
+	// http.ListenAndServe(":"+config.ListenPort, router)
+
+	 err = http.ListenAndServeTLS(":"+config.ListenPort, "cert.pem", "cert.key", router)
+	 if err != nil {
+	 	log.Fatal("ListenAndServe: ", err)
+	 }
+
 }

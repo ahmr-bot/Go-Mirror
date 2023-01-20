@@ -3,16 +3,12 @@
         "defaultServer": "http://127.0.0.1:8080/api/",
         "bjServer": "https://bj.api.mirror.mcserverx.com:4004/api/",
         "gzServer": "https://gz.api.mirror.mcserverx.com:4004/api/",
-        "gsServer": "https://jc.api.mirror.mcserverx.com:4004/api/",
-        "sgpServer": "https://sgp.api.mirror.mcserverx.com:4004/api/",
-        "AutoSel": "https://cdn.api.mirror.mcserverx.com/api/"
+        "gsServer": "https://jc.api.mirror.mcserverx.com:4004/api/"
     },
     "prod": {
-        "defaultServer": "https://api.mirror.mcserverx.com:4004/api/",
+        "defaultServer": "https://api.mirror.mcserverx.com/api/",
         "bjServer": "https://bj.api.mirror.mcserverx.com:4004/api/",
         "gzServer": "https://gz.api.mirror.mcserverx.com:4004/api/",
-        "gsServer": "https://jc.api.mirror.mcserverx.com:4004/api/",
-        "sgpServer": "https://sgp.api.mirror.mcserverx.com:4004/api/",
-        "AutoSel": "https://cdn.api.mirror.mcserverx.com/api/"
+        "gsServer": "https://jc.api.mirror.mcserverx.com:4004/api/"
     }
 }
