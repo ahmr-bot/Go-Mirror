@@ -1,16 +1,16 @@
 {
     "dev": {
-        "defaultServer": "http://127.0.0.1:8080/",
-        "bjServer": "http://bj..com/",
-        "gzServer": "http://gz..com/",
-        "gsServer": "http://jc..com/",
-        "AutoSel": "http://auto..com/"
+        "defaultServer": "http://127.0.0.1:8080/api/",
+        "bjServer": "http://bj..com/api/",
+        "gzServer": "http://gz..com/api/",
+        "gsServer": "http://jc..com/api/",
+        "AutoSel": "http://auto..com/api/"
     },
     "prod": {
         "defaultServer": "",
-        "bjServer": "http://bj..com/",
-        "gzServer": "http://gz..com/",
-        "gsServer": "http://jc..com/",
-        "AutoSel": "http://auto..com/"
+        "bjServer": "http://bj..com/api/",
+        "gzServer": "http://gz..com/api/",
+        "gsServer": "http://jc..com/api/",
+        "AutoSel": "http://auto..com/api/"
     }
 }

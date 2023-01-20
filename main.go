@@ -56,7 +56,8 @@ func main() {
 	// 设定路由
 	router := mux.NewRouter()
 	router.HandleFunc("/", middleware.RateLimiter(60, 60)(routers.HandleIndex))
-	router.HandleFunc("/list/{path:.*}", middleware.RateLimiter(60, 60)(routers.HandleList))
-	router.HandleFunc("/download/{path:.*}", middleware.RateLimiter(5, 60)(routers.HandleDownload))
+	router.HandleFunc("/api/location", middleware.RateLimiter(60, 60)(routers.HandleLocation))
+	router.HandleFunc("/api/list/{path:.*}", middleware.RateLimiter(60, 60)(routers.HandleList))
+	router.HandleFunc("/api/download/{path:.*}", middleware.RateLimiter(5, 60)(routers.HandleDownload))
 	http.ListenAndServe(":"+config.ListenPort, router)
 }

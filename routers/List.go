@@ -29,6 +29,7 @@ type Dir struct {
 	Path        string   `json:"path"`
 	Files       []Files  `json:"files"`
 	Directories []string `json:"directories"`
+	ServerLocation any `json:"server_location"`
 }
 
 var (
@@ -42,9 +43,13 @@ type Files struct {
 }
 
 func HandleList(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
 	pkg.SetupCORS(&w)
-	// 读取配置文件
-	file, err := os.Open("config.json")
+	var config Config
+	if x, found := dirCache.Get("config"); found {
+		config = x.(Config)
+	} else {
+		file, err := os.Open("config.json")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -56,9 +61,6 @@ func HandleList(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 	dirCache.Set("config", config, cache.DefaultExpiration)
-	if x, found := dirCache.Get("config"); found {
-		config = x.(Config)
-	} else {
 	}
 	dirPath := "root/" + mux.Vars(r)["path"]
 	if _, err := os.Stat(dirPath); os.IsNotExist(err) {

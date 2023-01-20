@@ -4,7 +4,7 @@
     <v-main class="bg-grey-lighten-3">
       <v-container>
         <v-row>
-          <v-col cols="5">
+          <v-col>
             <v-card>
       <v-card-title class="text-h6 text-md-h5 text-lg-h4">Welcome!</v-card-title>
       <v-card-text>
@@ -13,13 +13,18 @@
               后端及前端程序 由 Aehxy 开发，服务端同步工具 由 kingc 开发。
               <br /> 
               网络部分由 PH 提供支持。<br />
-              切换服务器:
+              当前选择的存储服务器: {{servername}}<br />
+              手动切换服务器:
       </v-card-text>
-      <a href="/?server=defaultServer">默认服务器(无CDN)</a><br />
-      <a href="/?server=AutoSel">自动选择(CDN)</a><br />
-      <a href="/?server=bjServer">北京服务器</a><br />
-      <a href="/?server=gzServer">贵州服务器</a><br />
-      <a href="/?server=gsServer">甘肃服务器</a><br />
+      <div class="d-flex justify-center align-baseline">
+      <v-btn href="/?server=defaultServer">默认服务器(无CDN)</v-btn><br />
+      <v-btn href="/?server=AutoSel">自动选择(CDN)</v-btn><br />
+      <v-btn href="/?server=bjServer">北京服务器</v-btn><br />
+      </div>
+      <div class="d-flex justify-center align-baseline">
+      <v-btn href="/?server=gzServer">贵州服务器</v-btn><br />
+      <v-btn href="/?server=gsServer">甘肃服务器</v-btn><br />
+      </div>  
     </v-card>
           </v-col>
 
@@ -28,26 +33,41 @@
               min-height="70vh"
               rounded="lg"
             >
-            <v-list density="compact">
       <v-breadcrumbs :items="items">
     <template v-slot:title="{ item }">
       {{ item.title.toUpperCase() }}
     </template>
   </v-breadcrumbs>
+  <v-card
+    class="mx-auto"
+    max-width="500"
+  >
+  <v-container fluid>
+      <v-row dense>
+        <v-col
+          v-for="list in lists"
+          :key="list.name"
+        >
+  <v-card min-width="150"  max-width='300' outlined>
+            <v-img
+              :src="list.img"
+              class="align-end"
+              :aspect-ratio="1"
+              gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+            >
+              <v-card-title class="text-white" v-text="list.name"></v-card-title>
+            </v-img>
 
-      <v-list-item
-        v-for="(list,i) in lists"
-        :key="i"
-        :value="list"
-        active-color="primary"
-        @click="router.push({path: list.link})"
-      >
-      <v-avatar>
-      <v-img :src="list.img"></v-img>
-    </v-avatar>
-    {{ list.name  }}
-      </v-list-item>
-    </v-list>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+
+              <v-btn size="small" color="surface-variant" variant="text" icon="mdi-heart" @click="router.push({path: list.link})">查看</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-card>
             </v-sheet>
           </v-col>
         </v-row>
@@ -79,6 +99,13 @@ const items = [
 const lists = ref([])
 const downlists = ref([])
 const imglists = ref([])
+const servername = ref([])
+axios({
+  method:'get',
+  url:server.value + 'location'
+}).then((res)=>{
+  servername.value = res.data.location
+})
 axios({
   method:'get',
   url:server.value + 'list/'
