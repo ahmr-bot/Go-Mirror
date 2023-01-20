@@ -6,7 +6,7 @@ import os
 
 import requests
 
-cores = ["Akarin","Bedrock_Server","BungeeCord","Cauldron","Contigo","CraftBukkit","CubeRite","DragonProxy","FiveM","GlowStone","HexaCord","Hose","MEENET","MITE","MiNET","Minecraft_Server","Mohist","Nemisys","Nukkit","NukkitX","PaperSpigot","PocketMine-MP","Spigot","SpongeForge","SpongeVanilla","TacoSpigot","Thermos","TorchSpigot","Travertine","Uranium","Vefland","Velocity","WaterFall"]
+cores = ["Akarin","Bedrock_Server","BungeeCord","CraftBukkit","HexaCord","Hose","MITE","Minecraft_Server","Mohist","Nukkit","NukkitX","PaperSpigot","PocketMine-MP","Spigot","SpongeForge","SpongeVanilla","TacoSpigot","TorchSpigot","Vefland","Velocity","WaterFall"]
 
 
 def download(core, name, url):
