@@ -9,7 +9,6 @@ import (
 )
 
 func HandleDownload(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
 	pkg.SetupCORS(&w)
 	filePath := "root/" + mux.Vars(r)["path"]
 
