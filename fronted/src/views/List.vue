@@ -44,7 +44,7 @@
         :key="list.Name"
       >
         <td>{{ list.Name }}</td>
-        <td>{{ list.Size }}</td>
+        <td>{{ list.Size }} MB</td>
         <v-btn :href="list.Url">下载</v-btn>
       </tr>
     </tbody>
