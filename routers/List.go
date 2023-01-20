@@ -22,6 +22,7 @@ type Config struct {
 	} `json:"directories"`
 	ServerAddr any `json:"server_addr"`
 	ListenPort any `json:"listen_port"`
+	ServerLocation any `json:"server_location"`
 }
 type Dir struct {
 	Description string   `json:"description"`
@@ -29,6 +30,7 @@ type Dir struct {
 	Path        string   `json:"path"`
 	Files       []Files  `json:"files"`
 	Directories []string `json:"directories"`
+	location any `json:"server_location"`
 }
 
 var (
@@ -42,6 +44,7 @@ type Files struct {
 }
 
 func HandleList(w http.ResponseWriter, r *http.Request) {
+	
 	pkg.SetupCORS(&w)
 	// 读取配置文件
 	file, err := os.Open("config.json")
@@ -97,13 +100,13 @@ func HandleList(w http.ResponseWriter, r *http.Request) {
 				if mux.Vars(r)["path"] == "" {
 					files = append(files, Files{
 						Name: fi.Name(),
-						Url:  fmt.Sprintf("%s/download%s/%s", config.ServerAddr, mux.Vars(r)["path"], fi.Name()),
+						Url:  fmt.Sprintf("%s/api/download%s/%s", config.ServerAddr, mux.Vars(r)["path"], fi.Name()),
 						Size: fi.Size() / 1024 / 1024,
 					})
 				} else {
 					files = append(files, Files{
 						Name: fi.Name(),
-						Url:  fmt.Sprintf("%s:%s/download/%s/%s", config.ServerAddr, config.ListenPort, mux.Vars(r)["path"], fi.Name()),
+						Url:  fmt.Sprintf("%s:%s/api/download/%s/%s", config.ServerAddr, config.ListenPort, mux.Vars(r)["path"], fi.Name()),
 						Size: fi.Size() / 1024 / 1024,
 					})
 				}

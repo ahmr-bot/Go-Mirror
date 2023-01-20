@@ -16,6 +16,14 @@
         </v-card-text>
       </v-card>
             </v-col>
+            <v-col cols="5">
+              <v-card>
+        <v-card-title class="text-h6 text-md-h5 text-lg-h4">简介</v-card-title>
+        <v-card-text>
+{{ des }}
+        </v-card-text>
+      </v-card>
+            </v-col>
   
             <v-col>
               <v-sheet
@@ -44,7 +52,7 @@
         :key="list.Name"
       >
         <td>{{ list.Name }}</td>
-        <td>{{ list.Size }}</td>
+        <td>{{ list.Size }} MB</td>
         <v-btn :href="list.Url">下载</v-btn>
       </tr>
     </tbody>
@@ -79,15 +87,13 @@ const items = [
       ]
     const server = ref(localStorage.getItem('server') || config.defaultServer)
   const lists = ref([])
-  const downlists = ref([])
-  const imglists = ref([])
+const des = ref([])
   axios({
     method:'get',
     url:server.value + 'list/' + router.params.name
   }).then((res)=>{
-    console.log(res.data)
     lists.value = res.data.files
-    console.log(lists.value)  
+    des.value = res.data.description
 })
   </script>
   

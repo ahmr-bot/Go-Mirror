@@ -1,9 +1,10 @@
 {
   "listen_port": "8080",
   "server_addr": "http://127.0.0.1",
+  "server_location": "1111",
   "directories": [
     {
-      "path": "114514",
+      "path": "root/Akarin",
       "description": "114514 服务端十分的牛逼！",
       "image": "114514.jpg"
     },
