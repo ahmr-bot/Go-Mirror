@@ -18,10 +18,10 @@
       </v-card-text>
       <div class="d-flex justify-center align-baseline">
       <v-btn href="/?server=defaultServer">自动选择服务器</v-btn><br />
-      <v-btn href="/?server=bjServer">北京服务器(IPV4+IPV6)</v-btn><br />
+      <v-btn href="/?server=bjServer">北京服务器(IPV4)</v-btn><br />
       </div>
       <div class="d-flex justify-center align-baseline">
-      <v-btn href="/?server=gzServer">贵州服务器(IPV4+IPV6)</v-btn><br />
+      <v-btn href="/?server=gzServer">贵州服务器(IPV4)</v-btn><br />
       <v-btn href="/?server=gsServer">甘肃服务器(IPV6)</v-btn><br />
       </div>  
     </v-card>
