@@ -5,67 +5,27 @@ import (
 	"fmt"
 	"github.com/ahmr-bot/MirrorsAPI/pkg"
 	"github.com/gorilla/mux"
-	"github.com/patrickmn/go-cache"
 	"log"
 	"net/http"
 	"os"
 	_ "path/filepath"
 	_ "strings"
-	"time"
 )
-
-type Config struct {
-	Directories []struct {
-		Path        string `json:"path"`
-		Description string `json:"description"`
-		Image       string `json:"image"`
-	} `json:"directories"`
-	ServerAddr any `json:"server_addr"`
-	ListenPort any `json:"listen_port"`
-	ServerLocation any `json:"server_location"`
-}
-type Dir struct {
-	Description string   `json:"description"`
-	Image       string   `json:"image"`
-	Path        string   `json:"path"`
-	Files       []Files  `json:"files"`
-	Directories []string `json:"directories"`
-	location any `json:"server_location"`
-}
-
-var (
-	dirCache = cache.New(5*time.Minute, 10*time.Minute)
-)
-
-type Files struct {
-	Name string
-	Url  string
-	Size int64
-}
 
 func HandleList(w http.ResponseWriter, r *http.Request) {
-	
+
 	pkg.SetupCORS(&w)
-	// 读取配置文件
-	file, err := os.Open("config.json")
+	CacheConfig, err := redisClient.Get(redisClient.Context(), "config").Result()
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("从Redis读取配置文件失败:", err)
 	}
-	// 关闭文件读取
-	defer file.Close()
-	// 解析 json 数据
 	var config Config
-	if err := json.NewDecoder(file).Decode(&config); err != nil {
+	if err := json.Unmarshal([]byte(CacheConfig), &config); err != nil {
 		log.Fatal(err)
-	}
-	dirCache.Set("config", config, cache.DefaultExpiration)
-	if x, found := dirCache.Get("config"); found {
-		config = x.(Config)
-	} else {
 	}
 	dirPath := "root/" + mux.Vars(r)["path"]
 	if _, err := os.Stat(dirPath); os.IsNotExist(err) {
-		http.Error(w, "Directory does not exist", http.StatusNotFound)
+		http.Error(w, "目录不存在", http.StatusNotFound)
 		return
 	}
 	var dir Dir
@@ -78,9 +38,9 @@ func HandleList(w http.ResponseWriter, r *http.Request) {
 			break
 		}
 	}
-	if x, found := dirCache.Get(dirPath); found {
-		dir = x.(Dir)
-	} else {
+	// 如果 redis 中有 dirPath 的，则直接从redis中读取 若没有，则从文件中读取 并将读取的结果存入redis
+	CacheDir, err := redisClient.Get(redisClient.Context(), dirPath).Result()
+	if err != nil {
 		var directories []string
 		currentDir, err := os.Open(dirPath)
 		if err != nil {
@@ -118,7 +78,10 @@ func HandleList(w http.ResponseWriter, r *http.Request) {
 			Files:       files,
 			Directories: directories,
 		}
-		dirCache.Set(dirPath, dir, cache.DefaultExpiration)
+		// 将dir存入redis
+		redisClient.Set(redisClient.Context(), dirPath, dir, 0)
+		json.NewEncoder(w).Encode(dir)
+	} else {
+		json.NewEncoder(w).Encode(CacheDir)
 	}
-	json.NewEncoder(w).Encode(dir)
 }

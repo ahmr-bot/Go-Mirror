@@ -2,6 +2,9 @@
   "listen_port": "4004",
   "server_addr": "https://127.0.0.1",
   "server_location": "服务器",
+  "redis_addr": "",
+  "redis_pass": "",
+  "redis_db": 0,
   "directories": [
     {
       "path": "root/Akarin",
