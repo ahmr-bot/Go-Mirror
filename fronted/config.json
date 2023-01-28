@@ -1,13 +1,11 @@
 {
     "dev": {
         "defaultServer": "http://127.0.0.1:8080/api/",
-        "bjServer": "https://bj.api.mirror.mcserverx.com:20100/api/",
         "gzServer": "https://gz.api.mirror.mcserverx.com:4004/api/",
         "gsServer": "https://gs.api.mirror.mcserverx.com:4004/api/"
     },
     "prod": {
         "defaultServer": "https://api.mirror.mcserverx.com/api/",
-        "bjServer": "https://bj.api.mirror.mcserverx.com:20100/api/",
         "gzServer": "https://gz.api.mirror.mcserverx.com:4004/api/",
         "gsServer": "https://gs.api.mirror.mcserverx.com:4004/api/"
     }
