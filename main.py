@@ -11,7 +11,7 @@ cores = ["Akarin","Bedrock_Server","BungeeCord","CraftBukkit","HexaCord","Hose",
 
 def download(core, name, url):
     url = url.replace("servers", "server")
-    url= url.replace("cdn", "prdx")
+    url = url.replace("cdn", "prdx")
     print(f"正在下载 {url} : {name}")
     response = requests.get(url)
     with open(f"root/{core}/{name}", 'wb') as f:
